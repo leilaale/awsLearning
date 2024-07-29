@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+    
+    InputBucket:
+        Type: 'AWS::S3::Bucket'
+        Properties:
+            BucketName: !Sub 'linkedin-serverless-214365'
+            NotificationConfiguration:
+              EventBridgeConfiguration:
+                EventBridgeEnabled: true
+
+    MyStateMachine:
+        Type: AWS::Serverless::StateMachine
+        Properties: 
+            DefinitionUri: statemachine/statemachine.asl.yaml
+            DefinitionSubstitutions: 
+                TranscriptionBucket: !Ref InputBucket
+            Policies:
+                - S3ReadPolicy:
+                    BucketName: !Ref InputBucket
+                - S3WritePolicy:
+                    BucketName: !Ref InputBucket
+                - Version: '2012-10-17'
+                  Statement:
+                        - Effect: Allow
+                          Action:
+                            - transcribe:StartTranscriptionJob
+                            - transcribe:GetTranscriptionJob
+                          Resource: '*'
+                        - Effect: Allow
+                          Action: 
+                            - translate:TranslateText
+                          Resource: '*'
+                        - Effect: Allow
+                          Action:
+                            - bedrock:invokeModel
+                          Resource: '*'
+
+Outputs:
+    InputBucketName:
+        Description: 'Input bucket name'
+        Value: !Ref InputBucket
