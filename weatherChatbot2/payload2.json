@@ -1,0 +1,17 @@
+{
+    "apiPath": "/weather5days",
+    "httpMethod": "GET",
+    "actionGroup": "weather-agent-1",
+    "parameters": [
+        {
+            "name": "latitude",
+            "type": "string",
+            "value": "-34.7667"
+        },
+        {
+            "name": "Longitude",
+            "type": "string",
+            "value": "-56.3806"
+        }
+    ]
+}

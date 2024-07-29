@@ -1,0 +1,9 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "sam-linkedin-serverless-weatherChabot"
+resolve_s3 = true
+s3_prefix = "sam-linkedin-serverless-weatherChabot"
+region = "us-west-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+parameter_overrides = "AgentBucketName=\"learning-weather-agent-bucket\" AgentARN=\"arn:aws:bedrock:us-west-2:590184047618:agent/NC5UK1HUJY\""

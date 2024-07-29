@@ -1,0 +1,134 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Weather Agent API",
+        "description": "Exposes the weather agent functionality",
+        "version": "1.0.0"
+    },
+
+    "paths": {
+        "/weather": {
+            "get": {
+                "description": "Gets the weather for today for a specific latitude and longitude that represents a city.",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude of the city in where to get the current weather",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude of the city in where to get the current weather",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Today's weather description for the given city",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "weatherDescription": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/weather5days": {
+            "get": {
+                "description": "Gets the weather for the next 5 days for a specific city",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude of the city in where to get the current weather",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude of the city in where to get the current weather",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Today's weather description for the given city",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "properties": {
+                                        "date": {
+                                            "type": "string",
+                                            "description": "Date of forecast"
+                                        },
+                        
+                                        "temp_min": {
+                                            "type": "string",
+                                            "description": "minimum temperature"
+                                        },
+
+                                        "temp_max": {
+                                            "type": "string",
+                                            "description": "maximum temperature"
+                                        },
+
+                                        "season_min": {
+                                            "type": "string",
+                                            "description": "minimum temperature for the season"
+                                        },
+
+                                        "season_max": {
+                                            "type": "string",
+                                            "description": "maximum temperature for the season"
+                                        },
+
+                                        "condition_name": {
+                                            "type": "string",
+                                            "description": "weather condition name"
+                                        },
+
+                                        "condition_desc": {
+                                            "type": "string",
+                                            "description": "weather condition description"
+                                        },
+
+                                        "condition_icon": {
+                                            "type": "string",
+                                            "description": "weather condition icon url"
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        
+    }
+}
